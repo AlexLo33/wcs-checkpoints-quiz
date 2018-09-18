@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+'use strict';
+
+const program = require('commander');
+const qcmApp = require('./qcmApp');
+
+program
+  .version('1.0.0')
+  .description('Promo 0918 - Checkpoint 1 - JS');
+
+program
+  .command('startApp', {isDefault: true})
+  .alias('start')
+  .description('Start QCM')
+  .action(() => {
+    qcmApp.startQcm();
+  });
+
+program.parse(process.argv);
