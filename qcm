@@ -2,18 +2,18 @@
 'use strict';
 
 const program = require('commander');
-const qcmApp = require('./qcmApp');
+const app = require('./src/app');
 
 program
   .version('1.0.0')
-  .description('Promo 0918 - Checkpoint 1 - JS');
+  .description('Wild Code School - Quizs');
 
 program
   .command('startApp', {isDefault: true})
   .alias('start')
   .description('Start QCM')
   .action(() => {
-    qcmApp.startQcm();
+    app.start();
   });
 
 program.parse(process.argv);

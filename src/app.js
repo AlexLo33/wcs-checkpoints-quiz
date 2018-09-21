@@ -1,10 +1,9 @@
 const prompt = require('prompt');
 const colors = require("colors/safe");
 
-const { readFile, writeFile } = require('fs');
+const { writeFile } = require('fs');
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
-const readFileSync = promisify(readFile);
 const writeFileSync = promisify(writeFile);
 
 const asyncPrompt = require('./lib/async-prompt').asyncPrompt;
@@ -12,7 +11,7 @@ const requests = require('./lib/requests');
 
 const filename = 'answers.txt';
 
-async function startQcm() {
+async function start() {
 
   // Clear default message from prompt
   prompt.message = '';
@@ -88,5 +87,5 @@ async function startQcm() {
 };
 
 module.exports = {
-  startQcm,
+  start,
 };

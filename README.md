@@ -1,29 +1,23 @@
-# Checkpoint 1 - JS
+# Quizs Checkpoints - Wild Code School
 
-**!!! PREMIERE ETAPE OBLIGATOIRE AVANT DE COMMENCER LE PREMIER EXERCICE !!!**
+**Application CLI permettant de participer à un quiz**
 
------------------------------------
-* Clonez ce projet
-* Créer une branche "nom_prenom", qui va contenir votre avancée. (nom_prenom sera remplacé par votre nom et votre prénom...)
-* Installez toutes les dépendances grâce à la commande suivante :
+## Prerequisites
 
-```sh
-npm install
-```
+* NodeJS
+* NPM
 
------------------------------------
-__A chaque fois que vous complétez un exercice:__
-* Faire un commit avec un message EXPLICITE sur votre branche.
-* Faire un push de votre branche.
 
------------------------------------
-## Partie 1: Q.C.M.
-
-* Pour lancer le qcm, ouvrez un terminal à la racine de ce projet, et tapez la commande suivante :
+## Installation
 
 ```sh
-./qcm start
+npm i -g wcs-checkpoints-quiz
 ```
-* Suivez les instructions présentes dans le terminal.
-* Répondez au questions qui vous seront posées.
-* Une fois le quiz terminé, n'oubliez pas de commiter le fichier de réponses.
+
+## Lancer l'application
+
+> Ouvrez un terminal à partir de n'importe quel répertoire et lancez l'application avec la commande suivante : 
+
+```sh
+wcs-checkpoints-quiz start
+```
