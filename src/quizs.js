@@ -17,7 +17,6 @@ async function startQuiz(i18n, idQuiz) {
 
   // Get questions from quiz
   try {
-    throw new Error();
     const quiz = await requests.getQuizById(idQuiz);
     const nbQuestions = quiz.questions.length;
 
