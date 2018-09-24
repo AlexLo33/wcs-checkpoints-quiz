@@ -1,15 +1,17 @@
 const prompt = require('prompt');
 const colors = require("colors/safe");
-
-const { writeFile } = require('fs');
-const { promisify } = require('util');
-const exec = promisify(require('child_process').exec);
-const writeFileSync = promisify(writeFile);
+const i18n = require("i18n");
 
 const asyncPrompt = require('./lib/async-prompt').asyncPrompt;
 const requests = require('./lib/requests');
+const quiz = require('./quizs');
 
-const filename = 'answers.txt';
+i18n.configure({
+  locales: ['en', 'fr'],
+  defaultLocale: 'fr',
+  directory: __dirname + '/locales',
+  register: global,
+});
 
 async function start() {
 
@@ -19,84 +21,55 @@ async function start() {
   // Start the prompt
   prompt.start();
 
-  // Introduction
-  console.log(colors.yellow.underline('\n ---- Quizs ---- \n'));
-  console.log(colors.yellow.bold('Choisissez un quiz dans la liste.'));
-  console.log(colors.yellow.bold('Répondez au questions de ce quiz.'));
-  console.log(colors.yellow.bold('Si plusieurs réponses sont possibles, séparez vos réponses par ","'));
-  console.log(colors.yellow.bold('À la fin du quiz, un fichier "answers.txt" sera automatiquement généré.'));
-  console.log(colors.yellow.bold('N\'oubliez pas de commiter ce fichier ;) '));
-  console.log(colors.red.bold('Si vous avez déjà répondu au quiz, le fichier précédemment créé sera automatiquement supprimé.'));
+  let keep = true;
 
-  // Selection quiz
-  console.log(colors.blue.bold('\nChoisissez le numéro du quiz auquel vous voulez participer :'));
-  const quizs = await requests.getAvailableQuizs();
-  for (let i = 0; i < quizs.length; i++) {
-    const quiz = quizs[i];
-    console.log(colors.blue(`${quiz.id}: ${quiz.nom}`));
-  }
-  console.log(colors.blue('0: Quitter l\'application'));
-  const selectionQuiz = await asyncPrompt(['Choix']);
-  const idQuiz = +selectionQuiz['Choix'];
+  while (keep) {
 
-  if (idQuiz === 0) {
-    console.log(colors.green.bold('Au revoir !'));
-    prompt.stop();
-    return;
-  }
+    // Introduction
+    console.log(colors.yellow.underline('\n ---- Quizs ---- \n'));
+    console.log(colors.yellow.bold(__('intro_1')));
+    console.log(colors.yellow.bold(__('intro_2')));
+    console.log(colors.yellow.bold(__('intro_3')));
+    console.log(colors.yellow.bold(__('intro_4')));
+    console.log(colors.yellow.bold(__('intro_5')));
+    console.log(colors.red.bold(__('warning_1')));
 
-  // Initialize answers
-  let answers = '';
-
-  // Get questions from quiz
-  try {
-    const quiz = await requests.getQuizById(idQuiz);
-    const nbQuestions = quiz.questions.length;
-    
-    console.log(colors.green.bold(`\n **** ${quiz.nom} ****`));
-    console.log(colors.green.bold(' ---- C\'est parti !!! ---- \n'));
-  
-    // Loop for each questions
-    for (let i = 0; i < nbQuestions; i++) {
-      console.log(colors.red.bold(`\n Question ${i + 1} :`));
-      const question = quiz.questions[i];
-      console.log(colors.blue.bold(` ${question.question}`));
-  
-      const responses = question.reponses;
-      for (let j = 0; j < responses.length; j++) {
-        const reponse = responses[j];
-        console.log(colors.blue(`    ${reponse.position}: ${reponse.nom}`));
-      }
-      console.log('');
-      const answer = await asyncPrompt(['Réponse']);
-      answers += (`Q.${i + 1}: ${answer['Réponse']}\n`);
-      console.log(colors.green.bold('\n  ---------------------------------'));
+    // Selection quiz
+    console.log(colors.blue.bold(__('menu_title')));
+    const quizs = await requests.getAvailableQuizs();
+    for (let i = 0; i < quizs.length; i++) {
+      const quiz = quizs[i];
+      console.log(colors.yellow(`${quiz.id}: ${quiz.nom}`));
     }
-  
-    try {
-      // Try to remove previous answers
-      await exec(`rm ${filename}`);
-    } catch (e) { }
-    finally {
-      try {
-        // Write answers
-        await writeFileSync(`./${filename}`, answers);
-        console.log(colors.green.italic('Vos réponses ont bien été enregistrées.'));
-        console.log(colors.green.italic('Merci d\'avoir participé à ce quiz!'));
-      } catch (e) {
-        console.log(colors.red.italic('Error : ', e));
-        console.log(colors.red.italic('Abort creating file.'));
-        console.log('');
-      }
+    console.log(colors.blue.bold(__('menu_lang')));
+    console.log(colors.blue.bold(__('menu_quit')));
+    const selectionQuiz = await asyncPrompt(['>']);
+    const userChoice = +selectionQuiz['>'];
+
+    switch (true) {
+      case (userChoice === 0):
+        console.log(colors.yellow(__('lang_title')));
+        console.log(colors.yellow(__('lang_1')));
+        console.log(colors.yellow(__('lang_2')));
+        const selectLang = await asyncPrompt(['>']);
+        if (+selectLang['>'] === 1) {
+          i18n.setLocale('fr');
+        } else {
+          i18n.setLocale('en');
+        }
+        break;
+      case (userChoice > 0):
+        await quiz.startQuiz(i18n, userChoice);
+        console.log(colors.blue.bold(__('press_any_key')));
+        await asyncPrompt(['>']);
+        break;
+      case (userChoice.toString().toLowerCase() === "q"):
+      default:
+        keep = false;
+        console.log(colors.green.bold(__('bye')));
     }
-  } catch(e) {
-    console.log(colors.red.bold('\nError : ', e.response.data.err));
-    console.log(colors.red.bold('L\'application va s\'arrêter\n'));
-  } finally {
-    // Stop prompt
-    prompt.stop();
   }
-  
+  prompt.stop();
 };
 
 module.exports = {

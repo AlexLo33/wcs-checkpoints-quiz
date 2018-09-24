@@ -1,0 +1,23 @@
+{
+  "intro_1": "Choisissez un quiz dans la liste.",
+  "intro_2": "Répondez au questions de ce quiz.",
+  "intro_3": "Si plusieurs réponses sont possibles, séparez vos réponses par \",\"",
+  "intro_4": "À la fin du quiz, un fichier \"answers.txt\" sera automatiquement généré.'",
+  "intro_5": "N'oubliez pas de commiter ce fichier ;) ",
+  "warning_1": "Si vous avez déjà répondu au quiz, le fichier précédemment créé sera automatiquement supprimé.",
+  "menu_title": "\nChoisissez le numéro du quiz auquel vous voulez participer :",
+  "menu_lang": "\n0: Changer de langue",
+  "menu_quit": "Q: Quitter l'application\n",
+  "lang_title": "\nChoisissez une langue :",
+  "lang_1": "1: Français",
+  "lang_2": "2: Anglais",
+  "quiz_start_1 %s": "\n **** %s ****",
+  "quiz_start_2": " ---- C'est parti !!! ---- \n",
+  "quiz_end_1": "\nVos réponses ont bien été enregistrées.",
+  "quiz_end_2": "Merci d'avoir participé à ce quiz!\n",
+  "bye": "Au revoir!",
+  "error %s": "\nErreur: %s",
+  "error_abort_create_file": "Annulation de la création du fichier.",
+  "error_application_stop": "Retour au menu principal.\n",
+  "press_any_key": "Appuyez sur une \"Entrée\" pour revenir au menu..."
+}

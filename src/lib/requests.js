@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-// const API_SERVER = 'http://localhost:3000'; // local
+// const API_SERVER = 'http://localhost:8181'; // local
 const API_SERVER = "http://92.175.11.66:8080"; // prod
 
 async function getAvailableQuizs() {
