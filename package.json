@@ -1,6 +1,6 @@
 {
   "name": "wcs-checkpoints-quiz",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Participez à des quiz écrits par vos formateus de la Wild Code School",
   "main": "qcm",
   "scripts": {
