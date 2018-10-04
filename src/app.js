@@ -26,7 +26,7 @@ async function start() {
   while (keep) {
 
     // Introduction
-    console.log(colors.yellow.underline('\n ---- Quizs ---- \n'));
+    console.log(colors.yellow.underline('\n ---- Quiz ---- \n'));
     console.log(colors.yellow.bold(__('intro_1')));
     console.log(colors.yellow.bold(__('intro_2')));
     console.log(colors.yellow.bold(__('intro_3')));

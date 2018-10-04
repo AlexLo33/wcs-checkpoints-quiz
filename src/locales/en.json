@@ -2,7 +2,7 @@
   "intro_1": "Choose a quiz from the list.",
   "intro_2": "Answer the questions in this quiz.",
   "intro_3": "If more than one answer is possible, separate your answers by \",\"",
-  "intro_4": "At the end of the quiz, a file \"answers.txt\" will be automatically generated.'",
+  "intro_4": "At the end of the quiz, a file \"answers.txt\" will be automatically generated.",
   "intro_5": "Don't forget to commit this file ;) ",
   "warning_1": "If you have already answered the quiz, the previously created file will be automatically deleted.",
   "menu_title": "\nChoose the number of the quiz you want to participate in:",

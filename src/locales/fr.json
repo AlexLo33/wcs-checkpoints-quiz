@@ -1,8 +1,8 @@
 {
   "intro_1": "Choisissez un quiz dans la liste.",
-  "intro_2": "Répondez au questions de ce quiz.",
+  "intro_2": "Répondez aux questions de ce quiz.",
   "intro_3": "Si plusieurs réponses sont possibles, séparez vos réponses par \",\"",
-  "intro_4": "À la fin du quiz, un fichier \"answers.txt\" sera automatiquement généré.'",
+  "intro_4": "À la fin du quiz, un fichier \"answers.txt\" sera automatiquement généré.",
   "intro_5": "N'oubliez pas de commiter ce fichier ;) ",
   "warning_1": "Si vous avez déjà répondu au quiz, le fichier précédemment créé sera automatiquement supprimé.",
   "menu_title": "\nChoisissez le numéro du quiz auquel vous voulez participer :",
